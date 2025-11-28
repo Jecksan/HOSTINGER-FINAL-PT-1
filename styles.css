@@ -1,0 +1,314 @@
+/* ===================================== */
+/* 0. VARIABLES Y RESET BÁSICO */
+/* ===================================== */
+:root {
+    --color-primary: #3f6ad8; /* Azul profesional */
+    --color-secondary: #263238; /* Azul grisáceo oscuro */
+    --color-background: #1e1e2f; /* Fondo oscuro elegante */
+    --color-text-light: #f4f4f4;
+    --color-text-dark: #333;
+    --color-success: #28a745;
+    --color-danger: #dc3545;
+    --color-warning: #ffc107;
+    --font-stack: 'Montserrat', sans-serif;
+    --transition-speed: 0.3s;
+}
+
+/* Importar la fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--color-background);
+    color: var(--color-text-light);
+    line-height: 1.6;
+    cursor: default; /* Cursor base */
+}
+
+/* ===================================== */
+/* 1. PARALLAX Y CABECERA (MOTION DESIGN) */
+/* ===================================== */
+#header-parallax {
+    height: 60vh; /* Altura de la cabecera */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Necesario para el parallax */
+    background: linear-gradient(135deg, var(--color-secondary), #111827);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    perspective: 1px; /* Para optimizar el Parallax en Chrome */
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    max-width: 90%;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.parallax-bg {
+    /* Este elemento se moverá más lento (controlado por JS) */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(0); /* Truco para aceleración de hardware */
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(63, 106, 216, 0.5);
+    margin-bottom: 10px;
+}
+
+.text-block p {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 25px;
+}
+
+/* Anillo Animado (Motion UI) */
+.motion-ring {
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 3px solid rgba(63, 106, 216, 0.5);
+    z-index: 1;
+    animation: rotateRing 15s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes rotateRing {
+    from { transform: rotate(0deg) translate(-50%, -50%); }
+    to { transform: rotate(360deg) translate(-50%, -50%); }
+}
+
+
+/* ===================================== */
+/* 2. DISEÑO PROFESIONAL DE LA TABLA */
+/* ===================================== */
+.main-content {
+    padding: 60px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--color-background);
+}
+
+#table-section h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    border-left: 5px solid var(--color-primary);
+    padding-left: 15px;
+}
+
+.table-container {
+    overflow-x: auto;
+    background: #2a2a3a;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1200px; /* Asegura que la tabla se desborde si es necesario */
+}
+
+thead th {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    padding: 15px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+    transition: background-color var(--transition-speed);
+}
+
+.data-row:hover {
+    background-color: #3b3b55; /* Destacar fila al pasar el cursor */
+    cursor: pointer;
+}
+
+.total-col {
+    font-weight: 700;
+    color: var(--color-warning); /* Color amarillo/oro para destacar el total */
+}
+
+/* ===================================== */
+/* 3. BOTONES Y MOTION UI */
+/* ===================================== */
+
+/* Botón de Agregar (Cabecera) - Efecto Pulse */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-action i {
+    margin-right: 10px;
+}
+
+.btn-action:hover {
+    background-color: #5d83e6;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.pulse-effect {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(63, 106, 216, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(63, 106, 216, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(63, 106, 216, 0); }
+}
+
+
+/* Botones de Iconos (Editar/Eliminar) */
+.actions-cell {
+    text-align: center;
+    width: 120px;
+}
+
+.btn-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 5px;
+    text-decoration: none;
+    color: var(--color-text-light);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-edit { background-color: var(--color-warning); } /* Amarillo para editar */
+.btn-edit:hover { 
+    background-color: #ffda6a; 
+    transform: scale(1.1) rotate(5deg); 
+    box-shadow: 0 0 10px var(--color-warning);
+}
+
+.btn-delete { background-color: var(--color-danger); } /* Rojo para eliminar */
+.btn-delete:hover { 
+    background-color: #ed4a5c; 
+    transform: scale(1.1) rotate(-5deg); 
+    box-shadow: 0 0 10px var(--color-danger);
+}
+
+.lock-icon {
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+
+/* Botón Cerrar Sesión (Flotante) */
+.logout-wrapper {
+    text-align: center;
+    padding: 50px 0 20px 0;
+}
+
+.btn-logout {
+    display: inline-block;
+    background-color: #495057;
+    color: var(--color-text-light);
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: #6c757d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* ===================================== */
+/* 4. SCROLL-BASED ANIMATIONS (SETUP) */
+/* (Controladas por el JS) */
+/* ===================================== */
+
+/* Ocultar elementos iniciales para que JS los muestre con animación */
+[data-scroll-animation] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Clases que JS añade al hacer scroll */
+.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animaciones específicas (Movimiento lateral y rápido) */
+.animate.fade-in-left {
+    transform: translateX(0);
+}
+[data-scroll-animation="fade-in-left"] {
+    transform: translateX(-50px);
+}
+.animate.fade-in-right {
+    transform: translateX(0);
+}
+[data-scroll-animation="fade-in-right"] {
+    transform: translateX(50px);
+}
+[data-scroll-animation="slide-in-bottom"] {
+    transition-delay: 0.2s; /* Un poco de retraso para que la tabla aparezca después del título */
+}
+
+/* ===================================== */
+/* 5. FOOTER */
+/* ===================================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: #888;
+    font-size: 0.85rem;
+}
